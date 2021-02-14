@@ -159,20 +159,22 @@ class _$PieceTearOff {
       {required int id,
       required String title,
       String? funFact,
-      String? description,
+      String? digitalDescription,
+      String? wallDescription,
       String? type,
       String? department,
       String? url,
-      String? imagePath}) {
+      required ListPieceImage images}) {
     return _Piece(
       id: id,
       title: title,
       funFact: funFact,
-      description: description,
+      digitalDescription: digitalDescription,
+      wallDescription: wallDescription,
       type: type,
       department: department,
       url: url,
-      imagePath: imagePath,
+      images: images,
     );
   }
 
@@ -189,11 +191,12 @@ mixin _$Piece {
   int get id;
   String get title;
   String? get funFact;
-  String? get description;
+  String? get digitalDescription;
+  String? get wallDescription;
   String? get type;
   String? get department;
-  String? get url;
-  String? get imagePath;
+  String? get url; // TODO images null check
+  ListPieceImage get images;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -208,11 +211,14 @@ abstract class $PieceCopyWith<$Res> {
       {int id,
       String title,
       String? funFact,
-      String? description,
+      String? digitalDescription,
+      String? wallDescription,
       String? type,
       String? department,
       String? url,
-      String? imagePath});
+      ListPieceImage images});
+
+  $ListPieceImageCopyWith<$Res> get images;
 }
 
 /// @nodoc
@@ -228,24 +234,36 @@ class _$PieceCopyWithImpl<$Res> implements $PieceCopyWith<$Res> {
     Object? id = freezed,
     Object? title = freezed,
     Object? funFact = freezed,
-    Object? description = freezed,
+    Object? digitalDescription = freezed,
+    Object? wallDescription = freezed,
     Object? type = freezed,
     Object? department = freezed,
     Object? url = freezed,
-    Object? imagePath = freezed,
+    Object? images = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
       funFact: funFact == freezed ? _value.funFact : funFact as String?,
-      description:
-          description == freezed ? _value.description : description as String?,
+      digitalDescription: digitalDescription == freezed
+          ? _value.digitalDescription
+          : digitalDescription as String?,
+      wallDescription: wallDescription == freezed
+          ? _value.wallDescription
+          : wallDescription as String?,
       type: type == freezed ? _value.type : type as String?,
       department:
           department == freezed ? _value.department : department as String?,
       url: url == freezed ? _value.url : url as String?,
-      imagePath: imagePath == freezed ? _value.imagePath : imagePath as String?,
+      images: images == freezed ? _value.images : images as ListPieceImage,
     ));
+  }
+
+  @override
+  $ListPieceImageCopyWith<$Res> get images {
+    return $ListPieceImageCopyWith<$Res>(_value.images, (value) {
+      return _then(_value.copyWith(images: value));
+    });
   }
 }
 
@@ -258,11 +276,15 @@ abstract class _$PieceCopyWith<$Res> implements $PieceCopyWith<$Res> {
       {int id,
       String title,
       String? funFact,
-      String? description,
+      String? digitalDescription,
+      String? wallDescription,
       String? type,
       String? department,
       String? url,
-      String? imagePath});
+      ListPieceImage images});
+
+  @override
+  $ListPieceImageCopyWith<$Res> get images;
 }
 
 /// @nodoc
@@ -279,23 +301,28 @@ class __$PieceCopyWithImpl<$Res> extends _$PieceCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? funFact = freezed,
-    Object? description = freezed,
+    Object? digitalDescription = freezed,
+    Object? wallDescription = freezed,
     Object? type = freezed,
     Object? department = freezed,
     Object? url = freezed,
-    Object? imagePath = freezed,
+    Object? images = freezed,
   }) {
     return _then(_Piece(
       id: id == freezed ? _value.id : id as int,
       title: title == freezed ? _value.title : title as String,
       funFact: funFact == freezed ? _value.funFact : funFact as String?,
-      description:
-          description == freezed ? _value.description : description as String?,
+      digitalDescription: digitalDescription == freezed
+          ? _value.digitalDescription
+          : digitalDescription as String?,
+      wallDescription: wallDescription == freezed
+          ? _value.wallDescription
+          : wallDescription as String?,
       type: type == freezed ? _value.type : type as String?,
       department:
           department == freezed ? _value.department : department as String?,
       url: url == freezed ? _value.url : url as String?,
-      imagePath: imagePath == freezed ? _value.imagePath : imagePath as String?,
+      images: images == freezed ? _value.images : images as ListPieceImage,
     ));
   }
 }
@@ -308,11 +335,12 @@ class _$_Piece implements _Piece {
       {required this.id,
       required this.title,
       this.funFact,
-      this.description,
+      this.digitalDescription,
+      this.wallDescription,
       this.type,
       this.department,
       this.url,
-      this.imagePath});
+      required this.images});
 
   factory _$_Piece.fromJson(Map<String, dynamic> json) =>
       _$_$_PieceFromJson(json);
@@ -324,19 +352,21 @@ class _$_Piece implements _Piece {
   @override
   final String? funFact;
   @override
-  final String? description;
+  final String? digitalDescription;
+  @override
+  final String? wallDescription;
   @override
   final String? type;
   @override
   final String? department;
   @override
   final String? url;
-  @override
-  final String? imagePath;
+  @override // TODO images null check
+  final ListPieceImage images;
 
   @override
   String toString() {
-    return 'Piece(id: $id, title: $title, funFact: $funFact, description: $description, type: $type, department: $department, url: $url, imagePath: $imagePath)';
+    return 'Piece(id: $id, title: $title, funFact: $funFact, digitalDescription: $digitalDescription, wallDescription: $wallDescription, type: $type, department: $department, url: $url, images: $images)';
   }
 
   @override
@@ -350,9 +380,12 @@ class _$_Piece implements _Piece {
             (identical(other.funFact, funFact) ||
                 const DeepCollectionEquality()
                     .equals(other.funFact, funFact)) &&
-            (identical(other.description, description) ||
+            (identical(other.digitalDescription, digitalDescription) ||
                 const DeepCollectionEquality()
-                    .equals(other.description, description)) &&
+                    .equals(other.digitalDescription, digitalDescription)) &&
+            (identical(other.wallDescription, wallDescription) ||
+                const DeepCollectionEquality()
+                    .equals(other.wallDescription, wallDescription)) &&
             (identical(other.type, type) ||
                 const DeepCollectionEquality().equals(other.type, type)) &&
             (identical(other.department, department) ||
@@ -360,9 +393,8 @@ class _$_Piece implements _Piece {
                     .equals(other.department, department)) &&
             (identical(other.url, url) ||
                 const DeepCollectionEquality().equals(other.url, url)) &&
-            (identical(other.imagePath, imagePath) ||
-                const DeepCollectionEquality()
-                    .equals(other.imagePath, imagePath)));
+            (identical(other.images, images) ||
+                const DeepCollectionEquality().equals(other.images, images)));
   }
 
   @override
@@ -371,11 +403,12 @@ class _$_Piece implements _Piece {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(funFact) ^
-      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(digitalDescription) ^
+      const DeepCollectionEquality().hash(wallDescription) ^
       const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(department) ^
       const DeepCollectionEquality().hash(url) ^
-      const DeepCollectionEquality().hash(imagePath);
+      const DeepCollectionEquality().hash(images);
 
   @JsonKey(ignore: true)
   @override
@@ -393,11 +426,12 @@ abstract class _Piece implements Piece {
       {required int id,
       required String title,
       String? funFact,
-      String? description,
+      String? digitalDescription,
+      String? wallDescription,
       String? type,
       String? department,
       String? url,
-      String? imagePath}) = _$_Piece;
+      required ListPieceImage images}) = _$_Piece;
 
   factory _Piece.fromJson(Map<String, dynamic> json) = _$_Piece.fromJson;
 
@@ -408,18 +442,396 @@ abstract class _Piece implements Piece {
   @override
   String? get funFact;
   @override
-  String? get description;
+  String? get digitalDescription;
+  @override
+  String? get wallDescription;
   @override
   String? get type;
   @override
   String? get department;
   @override
   String? get url;
-  @override
-  String? get imagePath;
+  @override // TODO images null check
+  ListPieceImage get images;
   @override
   @JsonKey(ignore: true)
   _$PieceCopyWith<_Piece> get copyWith;
+}
+
+ListPieceImage _$ListPieceImageFromJson(Map<String, dynamic> json) {
+  return _ListPieceImage.fromJson(json);
+}
+
+/// @nodoc
+class _$ListPieceImageTearOff {
+  const _$ListPieceImageTearOff();
+
+  _ListPieceImage call({required PieceImageWeb web}) {
+    return _ListPieceImage(
+      web: web,
+    );
+  }
+
+  ListPieceImage fromJson(Map<String, Object> json) {
+    return ListPieceImage.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $ListPieceImage = _$ListPieceImageTearOff();
+
+/// @nodoc
+mixin _$ListPieceImage {
+  PieceImageWeb get web;
+
+  Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
+  $ListPieceImageCopyWith<ListPieceImage> get copyWith;
+}
+
+/// @nodoc
+abstract class $ListPieceImageCopyWith<$Res> {
+  factory $ListPieceImageCopyWith(
+          ListPieceImage value, $Res Function(ListPieceImage) then) =
+      _$ListPieceImageCopyWithImpl<$Res>;
+  $Res call({PieceImageWeb web});
+
+  $PieceImageWebCopyWith<$Res> get web;
+}
+
+/// @nodoc
+class _$ListPieceImageCopyWithImpl<$Res>
+    implements $ListPieceImageCopyWith<$Res> {
+  _$ListPieceImageCopyWithImpl(this._value, this._then);
+
+  final ListPieceImage _value;
+  // ignore: unused_field
+  final $Res Function(ListPieceImage) _then;
+
+  @override
+  $Res call({
+    Object? web = freezed,
+  }) {
+    return _then(_value.copyWith(
+      web: web == freezed ? _value.web : web as PieceImageWeb,
+    ));
+  }
+
+  @override
+  $PieceImageWebCopyWith<$Res> get web {
+    return $PieceImageWebCopyWith<$Res>(_value.web, (value) {
+      return _then(_value.copyWith(web: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$ListPieceImageCopyWith<$Res>
+    implements $ListPieceImageCopyWith<$Res> {
+  factory _$ListPieceImageCopyWith(
+          _ListPieceImage value, $Res Function(_ListPieceImage) then) =
+      __$ListPieceImageCopyWithImpl<$Res>;
+  @override
+  $Res call({PieceImageWeb web});
+
+  @override
+  $PieceImageWebCopyWith<$Res> get web;
+}
+
+/// @nodoc
+class __$ListPieceImageCopyWithImpl<$Res>
+    extends _$ListPieceImageCopyWithImpl<$Res>
+    implements _$ListPieceImageCopyWith<$Res> {
+  __$ListPieceImageCopyWithImpl(
+      _ListPieceImage _value, $Res Function(_ListPieceImage) _then)
+      : super(_value, (v) => _then(v as _ListPieceImage));
+
+  @override
+  _ListPieceImage get _value => super._value as _ListPieceImage;
+
+  @override
+  $Res call({
+    Object? web = freezed,
+  }) {
+    return _then(_ListPieceImage(
+      web: web == freezed ? _value.web : web as PieceImageWeb,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_ListPieceImage implements _ListPieceImage {
+  _$_ListPieceImage({required this.web});
+
+  factory _$_ListPieceImage.fromJson(Map<String, dynamic> json) =>
+      _$_$_ListPieceImageFromJson(json);
+
+  @override
+  final PieceImageWeb web;
+
+  @override
+  String toString() {
+    return 'ListPieceImage(web: $web)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ListPieceImage &&
+            (identical(other.web, web) ||
+                const DeepCollectionEquality().equals(other.web, web)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(web);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ListPieceImageCopyWith<_ListPieceImage> get copyWith =>
+      __$ListPieceImageCopyWithImpl<_ListPieceImage>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ListPieceImageToJson(this);
+  }
+}
+
+abstract class _ListPieceImage implements ListPieceImage {
+  factory _ListPieceImage({required PieceImageWeb web}) = _$_ListPieceImage;
+
+  factory _ListPieceImage.fromJson(Map<String, dynamic> json) =
+      _$_ListPieceImage.fromJson;
+
+  @override
+  PieceImageWeb get web;
+  @override
+  @JsonKey(ignore: true)
+  _$ListPieceImageCopyWith<_ListPieceImage> get copyWith;
+}
+
+PieceImageWeb _$PieceImageWebFromJson(Map<String, dynamic> json) {
+  return _PieceImageWeb.fromJson(json);
+}
+
+/// @nodoc
+class _$PieceImageWebTearOff {
+  const _$PieceImageWebTearOff();
+
+  _PieceImageWeb call(
+      {required String url,
+      String? filename,
+      String? filesize,
+      String? width,
+      String? height}) {
+    return _PieceImageWeb(
+      url: url,
+      filename: filename,
+      filesize: filesize,
+      width: width,
+      height: height,
+    );
+  }
+
+  PieceImageWeb fromJson(Map<String, Object> json) {
+    return PieceImageWeb.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $PieceImageWeb = _$PieceImageWebTearOff();
+
+/// @nodoc
+mixin _$PieceImageWeb {
+  String get url;
+  String? get filename;
+  String? get filesize;
+  String? get width;
+  String? get height;
+
+  Map<String, dynamic> toJson();
+  @JsonKey(ignore: true)
+  $PieceImageWebCopyWith<PieceImageWeb> get copyWith;
+}
+
+/// @nodoc
+abstract class $PieceImageWebCopyWith<$Res> {
+  factory $PieceImageWebCopyWith(
+          PieceImageWeb value, $Res Function(PieceImageWeb) then) =
+      _$PieceImageWebCopyWithImpl<$Res>;
+  $Res call(
+      {String url,
+      String? filename,
+      String? filesize,
+      String? width,
+      String? height});
+}
+
+/// @nodoc
+class _$PieceImageWebCopyWithImpl<$Res>
+    implements $PieceImageWebCopyWith<$Res> {
+  _$PieceImageWebCopyWithImpl(this._value, this._then);
+
+  final PieceImageWeb _value;
+  // ignore: unused_field
+  final $Res Function(PieceImageWeb) _then;
+
+  @override
+  $Res call({
+    Object? url = freezed,
+    Object? filename = freezed,
+    Object? filesize = freezed,
+    Object? width = freezed,
+    Object? height = freezed,
+  }) {
+    return _then(_value.copyWith(
+      url: url == freezed ? _value.url : url as String,
+      filename: filename == freezed ? _value.filename : filename as String?,
+      filesize: filesize == freezed ? _value.filesize : filesize as String?,
+      width: width == freezed ? _value.width : width as String?,
+      height: height == freezed ? _value.height : height as String?,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$PieceImageWebCopyWith<$Res>
+    implements $PieceImageWebCopyWith<$Res> {
+  factory _$PieceImageWebCopyWith(
+          _PieceImageWeb value, $Res Function(_PieceImageWeb) then) =
+      __$PieceImageWebCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String url,
+      String? filename,
+      String? filesize,
+      String? width,
+      String? height});
+}
+
+/// @nodoc
+class __$PieceImageWebCopyWithImpl<$Res>
+    extends _$PieceImageWebCopyWithImpl<$Res>
+    implements _$PieceImageWebCopyWith<$Res> {
+  __$PieceImageWebCopyWithImpl(
+      _PieceImageWeb _value, $Res Function(_PieceImageWeb) _then)
+      : super(_value, (v) => _then(v as _PieceImageWeb));
+
+  @override
+  _PieceImageWeb get _value => super._value as _PieceImageWeb;
+
+  @override
+  $Res call({
+    Object? url = freezed,
+    Object? filename = freezed,
+    Object? filesize = freezed,
+    Object? width = freezed,
+    Object? height = freezed,
+  }) {
+    return _then(_PieceImageWeb(
+      url: url == freezed ? _value.url : url as String,
+      filename: filename == freezed ? _value.filename : filename as String?,
+      filesize: filesize == freezed ? _value.filesize : filesize as String?,
+      width: width == freezed ? _value.width : width as String?,
+      height: height == freezed ? _value.height : height as String?,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_PieceImageWeb implements _PieceImageWeb {
+  _$_PieceImageWeb(
+      {required this.url,
+      this.filename,
+      this.filesize,
+      this.width,
+      this.height});
+
+  factory _$_PieceImageWeb.fromJson(Map<String, dynamic> json) =>
+      _$_$_PieceImageWebFromJson(json);
+
+  @override
+  final String url;
+  @override
+  final String? filename;
+  @override
+  final String? filesize;
+  @override
+  final String? width;
+  @override
+  final String? height;
+
+  @override
+  String toString() {
+    return 'PieceImageWeb(url: $url, filename: $filename, filesize: $filesize, width: $width, height: $height)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _PieceImageWeb &&
+            (identical(other.url, url) ||
+                const DeepCollectionEquality().equals(other.url, url)) &&
+            (identical(other.filename, filename) ||
+                const DeepCollectionEquality()
+                    .equals(other.filename, filename)) &&
+            (identical(other.filesize, filesize) ||
+                const DeepCollectionEquality()
+                    .equals(other.filesize, filesize)) &&
+            (identical(other.width, width) ||
+                const DeepCollectionEquality().equals(other.width, width)) &&
+            (identical(other.height, height) ||
+                const DeepCollectionEquality().equals(other.height, height)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(url) ^
+      const DeepCollectionEquality().hash(filename) ^
+      const DeepCollectionEquality().hash(filesize) ^
+      const DeepCollectionEquality().hash(width) ^
+      const DeepCollectionEquality().hash(height);
+
+  @JsonKey(ignore: true)
+  @override
+  _$PieceImageWebCopyWith<_PieceImageWeb> get copyWith =>
+      __$PieceImageWebCopyWithImpl<_PieceImageWeb>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_PieceImageWebToJson(this);
+  }
+}
+
+abstract class _PieceImageWeb implements PieceImageWeb {
+  factory _PieceImageWeb(
+      {required String url,
+      String? filename,
+      String? filesize,
+      String? width,
+      String? height}) = _$_PieceImageWeb;
+
+  factory _PieceImageWeb.fromJson(Map<String, dynamic> json) =
+      _$_PieceImageWeb.fromJson;
+
+  @override
+  String get url;
+  @override
+  String? get filename;
+  @override
+  String? get filesize;
+  @override
+  String? get width;
+  @override
+  String? get height;
+  @override
+  @JsonKey(ignore: true)
+  _$PieceImageWebCopyWith<_PieceImageWeb> get copyWith;
 }
 
 PieceResponse _$PieceResponseFromJson(Map<String, dynamic> json) {

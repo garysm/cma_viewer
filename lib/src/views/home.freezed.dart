@@ -143,3 +143,136 @@ abstract class _PiecePagination implements PiecePagination {
   @JsonKey(ignore: true)
   _$PiecePaginationCopyWith<_PiecePagination> get copyWith;
 }
+
+/// @nodoc
+class _$PieceOffsetTearOff {
+  const _$PieceOffsetTearOff();
+
+  _PieceOffset call({required int offset, String name = ''}) {
+    return _PieceOffset(
+      offset: offset,
+      name: name,
+    );
+  }
+}
+
+/// @nodoc
+const $PieceOffset = _$PieceOffsetTearOff();
+
+/// @nodoc
+mixin _$PieceOffset {
+  int get offset;
+  String get name;
+
+  @JsonKey(ignore: true)
+  $PieceOffsetCopyWith<PieceOffset> get copyWith;
+}
+
+/// @nodoc
+abstract class $PieceOffsetCopyWith<$Res> {
+  factory $PieceOffsetCopyWith(
+          PieceOffset value, $Res Function(PieceOffset) then) =
+      _$PieceOffsetCopyWithImpl<$Res>;
+  $Res call({int offset, String name});
+}
+
+/// @nodoc
+class _$PieceOffsetCopyWithImpl<$Res> implements $PieceOffsetCopyWith<$Res> {
+  _$PieceOffsetCopyWithImpl(this._value, this._then);
+
+  final PieceOffset _value;
+  // ignore: unused_field
+  final $Res Function(PieceOffset) _then;
+
+  @override
+  $Res call({
+    Object? offset = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      offset: offset == freezed ? _value.offset : offset as int,
+      name: name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$PieceOffsetCopyWith<$Res>
+    implements $PieceOffsetCopyWith<$Res> {
+  factory _$PieceOffsetCopyWith(
+          _PieceOffset value, $Res Function(_PieceOffset) then) =
+      __$PieceOffsetCopyWithImpl<$Res>;
+  @override
+  $Res call({int offset, String name});
+}
+
+/// @nodoc
+class __$PieceOffsetCopyWithImpl<$Res> extends _$PieceOffsetCopyWithImpl<$Res>
+    implements _$PieceOffsetCopyWith<$Res> {
+  __$PieceOffsetCopyWithImpl(
+      _PieceOffset _value, $Res Function(_PieceOffset) _then)
+      : super(_value, (v) => _then(v as _PieceOffset));
+
+  @override
+  _PieceOffset get _value => super._value as _PieceOffset;
+
+  @override
+  $Res call({
+    Object? offset = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_PieceOffset(
+      offset: offset == freezed ? _value.offset : offset as int,
+      name: name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_PieceOffset implements _PieceOffset {
+  _$_PieceOffset({required this.offset, this.name = ''});
+
+  @override
+  final int offset;
+  @JsonKey(defaultValue: '')
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'PieceOffset(offset: $offset, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _PieceOffset &&
+            (identical(other.offset, offset) ||
+                const DeepCollectionEquality().equals(other.offset, offset)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(offset) ^
+      const DeepCollectionEquality().hash(name);
+
+  @JsonKey(ignore: true)
+  @override
+  _$PieceOffsetCopyWith<_PieceOffset> get copyWith =>
+      __$PieceOffsetCopyWithImpl<_PieceOffset>(this, _$identity);
+}
+
+abstract class _PieceOffset implements PieceOffset {
+  factory _PieceOffset({required int offset, String name}) = _$_PieceOffset;
+
+  @override
+  int get offset;
+  @override
+  String get name;
+  @override
+  @JsonKey(ignore: true)
+  _$PieceOffsetCopyWith<_PieceOffset> get copyWith;
+}
