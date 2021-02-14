@@ -92,9 +92,7 @@ class Home extends HookWidget {
                 SliverAppBar(
                   expandedHeight: 200,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: SizedBox(
-                      height: 40,
-                    ),
+                    title: Text('CMA Viewer'),
                     centerTitle: true,
                     titlePadding: const EdgeInsetsDirectional.only(bottom: 8),
                   ),

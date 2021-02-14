@@ -11,7 +11,7 @@ class LoadingImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       url,
-      fit: BoxFit.cover,
+      // fit: BoxFit.cover,
       width: double.infinity,
       height: double.infinity,
       errorBuilder: (c, err, stack) {
