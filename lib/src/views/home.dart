@@ -86,8 +86,10 @@ class Home extends HookWidget {
       },
       data: (pieceCount) {
         return Scaffold(
+          drawer: Drawer(),
           body: SafeArea(
             child: CustomScrollView(
+              scrollDirection: Axis.vertical,
               slivers: [
                 SliverAppBar(
                   expandedHeight: 200,
@@ -100,20 +102,24 @@ class Home extends HookWidget {
                 ),
                 SliverPadding(
                   padding: const EdgeInsets.only(top: 10, left: 3, right: 3),
-                  sliver: SliverGrid(
+                  sliver: SliverStaggeredGrid(
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.8,
+                        SliverStaggeredGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 4.0,
+                      crossAxisSpacing: 4.0,
+                      crossAxisCount: 4,
+                      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
                     ),
-                    delegate: SliverChildBuilderDelegate((c, index) {
-                      return ProviderScope(
-                        overrides: [
-                          _characterIndex.overrideWithValue(index),
-                        ],
-                        child: const PieceItem(),
-                      );
-                    }),
+                    delegate: SliverChildBuilderDelegate(
+                      (c, index) {
+                        return ProviderScope(
+                          overrides: [
+                            _characterIndex.overrideWithValue(index),
+                          ],
+                          child: const PieceItem(),
+                        );
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -147,20 +153,14 @@ class PieceItem extends HookWidget {
       error: (error, stackTrace) => Text('Error $error'),
       data: (piece) {
         return Card(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: Hero(
-                  tag: 'piece-${piece.id}',
-                  child: LoadingImage(url: piece.images.web.url),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Text(piece.title),
-              ),
-            ],
+          elevation: 4.0,
+          color: index.isEven ? Colors.brown : Theme.of(context).canvasColor,
+          child: Container(
+            padding: EdgeInsets.all(4.0),
+            child: Hero(
+              tag: 'piece-${piece.id}',
+              child: LoadingImage(url: piece.images.web.url),
+            ),
           ),
         );
       },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class LoadingImage extends StatelessWidget {
   const LoadingImage({
@@ -9,19 +10,21 @@ class LoadingImage extends StatelessWidget {
   final String url;
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-      url,
-      // fit: BoxFit.cover,
-      width: double.infinity,
-      height: double.infinity,
-      errorBuilder: (c, err, stack) {
-        return const Center(child: Text('error'));
+    return FadeInImage.memoryNetwork(
+      placeholder: kTransparentImage,
+      placeholderErrorBuilder: (c, err, stack) {
+        return const Center(
+          child: Text('error'),
+        );
       },
-      frameBuilder: (c, image, frame, sync) {
-        if (!sync && frame == null) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        return image;
+      image: url,
+      // fit: BoxFit.cover,
+      // width: double.infinity,
+      // height: double.infinity,
+      imageErrorBuilder: (c, err, stack) {
+        return const Center(
+          child: Text('error'),
+        );
       },
     );
   }
